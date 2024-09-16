@@ -17,3 +17,21 @@
 .card img{
     height: 250px;
 }
+.icon {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+}
+.allowed {
+    color: green;
+}
+.not-allowed {
+    color: red;
+}
+.allowed-text {
+    color: green;
+    font-weight: bold;
+}
+.not-allowed-text {
+    color: red;
+    font-weight: bold;
+}

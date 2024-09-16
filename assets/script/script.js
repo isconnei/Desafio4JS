@@ -120,46 +120,6 @@ const propiedades_comprar = [
         costo: 400000,
         smoke: true,
         pets: false
-    },
-    {
-        nombre: 'Villa en la montaña',
-        src: 'https://via.placeholder.com/250',
-        descripcion: 'Exclusiva villa con piscina y vistas panorámicas a las montañas.',
-        ubicacion: 'Alpes Suizos',
-        habitaciones: 5,
-        costo: 900000,
-        smoke: false,
-        pets: true
-    },
-    {
-        nombre: 'Casa de campo',
-        src: 'https://via.placeholder.com/250',
-        descripcion: 'Encantadora casa de campo con terreno amplio y cercado.',
-        ubicacion: 'Región de Toscana, Italia',
-        habitaciones: 4,
-        costo: 250000,
-        smoke: false,
-        pets: true
-    },
-    {
-        nombre: 'Apartamento moderno',
-        src: 'https://via.placeholder.com/250',
-        descripcion: 'Apartamento moderno en un edificio con gimnasio y piscina.',
-        ubicacion: 'Zona Urbana de Londres',
-        habitaciones: 2,
-        costo: 500000,
-        smoke: true,
-        pets: false
-    },
-    {
-        nombre: 'Casa con vista al lago',
-        src: 'https://via.placeholder.com/250',
-        descripcion: 'Casa con vista directa al lago y acceso privado a la playa.',
-        ubicacion: 'Lago Tahoe, California',
-        habitaciones: 3,
-        costo: 600000,
-        smoke: false,
-        pets: true
     }
 ];
 
@@ -174,8 +134,14 @@ function crearCardHTML(propiedad) {
                     <p><strong>Ubicación:</strong> ${propiedad.ubicacion}</p>
                     <p><strong>Habitaciones:</strong> ${propiedad.habitaciones}</p>
                     <p><strong>Costo:</strong> $${propiedad.costo}</p>
-                    <p><strong>Fumadores permitidos:</strong> ${propiedad.smoke ? 'Sí' : 'No'}</p>
-                    <p><strong>Se permiten mascotas:</strong> ${propiedad.pets ? 'Sí' : 'No'}</p>
+                   <p class="${propiedad.smoke ? 'allowed-text' : 'not-allowed-text'}">
+                        <i class="fas fa-smoking ${propiedad.smoke ? 'allowed' : 'not-allowed'} icon"></i>
+                        ${propiedad.smoke ? 'Permitido fumar' : 'No se permite fumar'}
+                    </p>
+                    <p class="${propiedad.pets ? 'allowed-text' : 'not-allowed-text'}">
+                        <i class="fas fa-paw ${propiedad.pets ? 'allowed' : 'not-allowed'} icon"></i>
+                        ${propiedad.pets ? 'Mascotas permitidas' : 'No se permiten mascotas'}
+                    </p>
                 </div>
             </div>
         </div>
@@ -194,7 +160,26 @@ function cargarCards() {
         for (const propiedad of propiedades_comprar) {
             cardsHTML += crearCardHTML(propiedad);
         }
+    } else if (window.pageType === 'index'){
+        const containerVenta = document.getElementById('venta .row');
+        const containerAlquiler = document.getElementById('alquiler .row');
+        let cardsVentaHTML = '';
+        let cardsAlquilerHTML = '';
+    
+        const propiedadesVentaLimitadas = propiedades_comprar.slice(0, 3);
+        for (const propiedad of propiedadesVentaLimitadas) {
+            cardsVentaHTML += crearCardHTML(propiedad);
+        }
+    
+        const propiedadesAlquilerLimitadas = propiedades_alquiler.slice(0, 3);
+        for (const propiedad of propiedadesAlquilerLimitadas) {
+            cardsAlquilerHTML += crearCardHTML(propiedad);
+        }
+    
+        containerVenta.innerHTML = cardsVentaHTML;
+        containerAlquiler.innerHTML = cardsAlquilerHTML;
     }
+
     container.innerHTML = cardsHTML;
 }
 
