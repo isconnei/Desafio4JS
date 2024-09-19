@@ -153,33 +153,24 @@ function cargarCards() {
     let cardsHTML = '';
 
     if(window.pageType === 'index'){
-        const containerVenta = document.getElementById('cards-venta');
-        const containerAlquiler = document.getElementById('cards-alquiler');
-        let cardsVentaHTML = '';
-        let cardsAlquilerHTML = '';
     
-        const propiedadesVentaLimitadas = propiedades_comprar.slice(0, 3);
-        for (const propiedad of propiedadesVentaLimitadas) {
+        let cardsVentaHTML = '', cardsAlquilerHTML = '';
+    
+        for (const propiedad of propiedades_comprar.slice(0, 3)) {
             cardsVentaHTML += crearCardHTML(propiedad);
         }
     
-        const propiedadesAlquilerLimitadas = propiedades_alquiler.slice(0, 3);
-        for (const propiedad of propiedadesAlquilerLimitadas) {
+        for (const propiedad of propiedades_alquiler.slice(0, 3)) {
             cardsAlquilerHTML += crearCardHTML(propiedad);
         }
     
-        containerVenta.innerHTML = cardsVentaHTML;
-        containerAlquiler.innerHTML = cardsAlquilerHTML;
+        document.getElementById('cards-venta').innerHTML = cardsVentaHTML;
+        document.getElementById('cards-alquiler').innerHTML = cardsAlquilerHTML;
     }
     else{
-        if (window.pageType === 'alquiler') {
-            for (const propiedad of propiedades_alquiler) {
-                cardsHTML += crearCardHTML(propiedad);
-            }
-        } else if (window.pageType === 'compra') {
-            for (const propiedad of propiedades_comprar) {
-                cardsHTML += crearCardHTML(propiedad);
-            }
+        propiedades = window.pageType === 'alquiler' ? propiedades_alquiler : propiedades_comprar;
+        for (const propiedad of propiedades) {
+            cardsHTML += crearCardHTML(propiedad);
         }
         container.innerHTML = cardsHTML;
     }
