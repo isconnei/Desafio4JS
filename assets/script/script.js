@@ -152,17 +152,9 @@ function cargarCards() {
     const container = document.getElementById('cards');
     let cardsHTML = '';
 
-    if (window.pageType === 'alquiler') {
-        for (const propiedad of propiedades_alquiler) {
-            cardsHTML += crearCardHTML(propiedad);
-        }
-    } else if (window.pageType === 'compra') {
-        for (const propiedad of propiedades_comprar) {
-            cardsHTML += crearCardHTML(propiedad);
-        }
-    } else if (window.pageType === 'index'){
-        const containerVenta = document.getElementById('venta .row');
-        const containerAlquiler = document.getElementById('alquiler .row');
+    if(window.pageType === 'index'){
+        const containerVenta = document.getElementById('cards-venta');
+        const containerAlquiler = document.getElementById('cards-alquiler');
         let cardsVentaHTML = '';
         let cardsAlquilerHTML = '';
     
@@ -179,8 +171,17 @@ function cargarCards() {
         containerVenta.innerHTML = cardsVentaHTML;
         containerAlquiler.innerHTML = cardsAlquilerHTML;
     }
-
-    container.innerHTML = cardsHTML;
+    else{
+        if (window.pageType === 'alquiler') {
+            for (const propiedad of propiedades_alquiler) {
+                cardsHTML += crearCardHTML(propiedad);
+            }
+        } else if (window.pageType === 'compra') {
+            for (const propiedad of propiedades_comprar) {
+                cardsHTML += crearCardHTML(propiedad);
+            }
+        }
+        container.innerHTML = cardsHTML;
+    }
 }
-
 window.onload = cargarCards;
